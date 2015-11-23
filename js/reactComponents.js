@@ -4,26 +4,49 @@ var PlayerName = React.createClass({
     var className = classNames(
       'playerName',
       this.props.colour,
+      this.props.yellow ? 'yellow-stripe' : '',
       this.props.width
     );
     return (
-      <a className={className} href={this.props.href}>
-        {this.props.children}
-      </a>
+      <div className={className}>
+        <a href={this.props.href}>
+          {this.props.children}
+        </a>
+      </div>
     );
   }
 });
 
 var GameAchievements = React.createClass({
   render: function() {
+    var className = classNames(
+      'gameAchievements',
+      this.props.yellow ? 'yellow-stripe' : '',
+      this.props.width
+    );
     var cups = this.props.achievements.map(function(ach) {
       return (
         <img src="img/trophy5_24.png" alt="Achievement unlocked!" title="Achievement unlocked!"/>
       );
     });
     return (
-      <div className="gameAchievements">
+      <div className={className}>
         {cups}
+      </div>
+    );
+  }
+});
+
+var GameScore = React.createClass({
+  render: function() {
+    var className = classNames(
+      'gameScore',
+      this.props.yellow ? 'yellow-stripe' : '',
+      this.props.width
+    );
+    return (
+      <div className={className}>
+        {this.props.redScore} - {this.props.blueScore}
       </div>
     );
   }
@@ -61,22 +84,18 @@ var RankChange = React.createClass({
 
 var GameRecord = React.createClass({
   render: function() {
+    var redStripe = this.props.data.red.score == 10 && this.props.data.blue.score == 0;
+    var blueStripe = this.props.data.red.score == 0 && this.props.data.blue.score == 10;
     return (
       <div className="gameRecord recent-game container-fluid">
         <div className="row recent-game-result">
-          <PlayerName href={this.props.data.red.href} colour="red-player" width="col-md-4">
+          <PlayerName href={this.props.data.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
             {this.props.data.red.name}
           </PlayerName>
-          <div className="col-md-1">
-            <GameAchievements achievements={this.props.data.red.achievements}/>
-          </div>
-          <div className="col-md-2">
-            {this.props.data.red.score} - {this.props.data.blue.score}
-          </div>
-          <div className="col-md-1">
-            <GameAchievements achievements={this.props.data.blue.achievements}/>
-          </div>
-          <PlayerName href={this.props.data.blue.href} colour="blue-player" width="col-md-4">
+          <GameAchievements achievements={this.props.data.red.achievements} yellow={redStripe} width="col-md-1"/>
+          <GameScore redScore={this.props.data.red.score} blueScore={this.props.data.blue.score} width="col-md-2" yellow={redStripe || blueStripe}/>
+          <GameAchievements achievements={this.props.data.blue.achievements} yellow={blueStripe} width="col-md-1"/>
+          <PlayerName href={this.props.data.blue.href} colour="blue-player" yellow={blueStripe} width="col-md-4">
             {this.props.data.blue.name}
           </PlayerName>
         </div>
