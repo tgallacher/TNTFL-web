@@ -52,6 +52,26 @@ var GameScore = React.createClass({
   }
 });
 
+var GameTime = React.createClass({
+  render: function() {
+    function theTime(epoch) {
+      var date = new Date(epoch * 1000);
+      return (
+        date.getFullYear() + "-" +
+        (date.getMonth() + 1) + "-" +
+        date.getDate() + " " +
+        date.getHours() + ":" +
+        date.getMinutes()
+      );
+    }
+    return (
+      <a href={this.props.date}>
+        {theTime(this.props.date)}
+      </a>
+    );
+  }
+});
+
 var SkillChange = React.createClass({
   render: function() {
     var className = classNames(
@@ -107,9 +127,7 @@ var GameRecord = React.createClass({
             <SkillChange skillChange={this.props.data.red.skillChange} colour="skill-change-red"/>
           </div>
           <div className="col-md-4">
-            <a href={this.props.data.date}>
-              {this.props.data.date}
-            </a>
+            <GameTime date={this.props.data.date}/>
           </div>
           <div className="col-md-2">
             <SkillChange skillChange={this.props.data.blue.skillChange} colour="skill-change-blue"/>
