@@ -1,7 +1,12 @@
+
 var PlayerName = React.createClass({
   render: function() {
+    var className = classNames(
+      'playerName',
+      this.props.colour
+    );
     return (
-      <a className="playerName" href={this.props.href} className={this.props.colour}>
+      <a className={className} href={this.props.href}>
         {this.props.children}
       </a>
     );
@@ -25,20 +30,30 @@ var GameAchievements = React.createClass({
 
 var SkillChange = React.createClass({
   render: function() {
+    var className = classNames(
+      'skillChange',
+      'skill-change',
+      this.props.colour
+    );
     return (
-      <div className="skillChange skill-change" className={this.props.colour}>
+      <span className={className}>
         {this.props.skillChange}
-      </div>
+      </span>
     );
   }
 });
 
 var RankChange = React.createClass({
   render: function() {
+    var className = classNames(
+      'rankChange',
+      'skill-change',
+      this.props.colour
+    );
     return (
-      <div className="rankChange skill-change" className={this.props.colour}>
+      <span className={className}>
         {this.props.rankChange}
-      </div>
+      </span>
     );
   }
 });
