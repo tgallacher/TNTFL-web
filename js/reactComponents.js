@@ -3,7 +3,8 @@ var PlayerName = React.createClass({
   render: function() {
     var className = classNames(
       'playerName',
-      this.props.colour
+      this.props.colour,
+      this.props.width
     );
     return (
       <a className={className} href={this.props.href}>
@@ -63,9 +64,9 @@ var GameRecord = React.createClass({
     return (
       <div className="gameRecord recent-game container-fluid">
         <div className="row recent-game-result">
-          <div className="col-md-4">
-            <PlayerName href={this.props.data.red.href} colour="red-player">{this.props.data.red.name}</PlayerName>
-          </div>
+          <PlayerName href={this.props.data.red.href} colour="red-player" width="col-md-4">
+            {this.props.data.red.name}
+          </PlayerName>
           <div className="col-md-1">
             <GameAchievements achievements={this.props.data.red.achievements}/>
           </div>
@@ -75,9 +76,9 @@ var GameRecord = React.createClass({
           <div className="col-md-1">
             <GameAchievements achievements={this.props.data.blue.achievements}/>
           </div>
-          <div className="col-md-4">
-            <PlayerName href={this.props.data.blue.href} colour="blue-player">{this.props.data.blue.name}</PlayerName>
-          </div>
+          <PlayerName href={this.props.data.blue.href} colour="blue-player" width="col-md-4">
+            {this.props.data.blue.name}
+          </PlayerName>
         </div>
         <div className="row">
           <div className="col-md-2">
