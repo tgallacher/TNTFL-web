@@ -81,7 +81,7 @@ var SkillChange = React.createClass({
     );
     return (
       <span className={className}>
-        {this.props.skillChange}
+        {(this.props.skillChange).toFixed(3)}
       </span>
     );
   }
