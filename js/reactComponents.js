@@ -81,7 +81,7 @@ var SkillChange = React.createClass({
     );
     return (
       <span className={className}>
-        {(this.props.skillChange).toFixed(3)}
+        +{(this.props.skillChange).toFixed(3)}
       </span>
     );
   }
@@ -96,7 +96,7 @@ var RankChange = React.createClass({
     );
     return (
       <span className={className}>
-        {this.props.rankChange}
+        +{this.props.rankChange}
       </span>
     );
   }
@@ -121,19 +121,19 @@ var GameRecord = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-2">
-            <RankChange rankChange={this.props.data.red.rankChange} colour="skill-change-red"/>
+            {this.props.data.red.rankChange != 0 ? <RankChange rankChange={this.props.data.red.rankChange} colour="skill-change-red"/> : null}
           </div>
           <div className="col-md-2">
-            <SkillChange skillChange={this.props.data.red.skillChange} colour="skill-change-red"/>
+            {this.props.data.red.skillChange > 0 ? <SkillChange skillChange={this.props.data.red.skillChange} colour="skill-change-red"/> : null}
           </div>
           <div className="col-md-4">
             <GameTime date={this.props.data.date}/>
           </div>
           <div className="col-md-2">
-            <SkillChange skillChange={this.props.data.blue.skillChange} colour="skill-change-blue"/>
+            {this.props.data.blue.skillChange >= 0 ? <SkillChange skillChange={this.props.data.blue.skillChange} colour="skill-change-blue"/> : null}
           </div>
           <div className="col-md-2">
-            <RankChange rankChange={this.props.data.blue.rankChange} colour="skill-change-blue"/>
+            {this.props.data.blue.rankChange != 0 ? <RankChange rankChange={this.props.data.blue.rankChange} colour="skill-change-blue"/> : null}
           </div>
         </div>
       </div>
