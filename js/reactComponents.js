@@ -236,3 +236,14 @@ var NavigationBar = React.createClass({
   }
 });
 window.NavigationBar = NavigationBar;
+
+var JsonLink = React.createClass({
+  render: function() {
+    return (
+      <div className="jsonLink">
+        <p><a href="json">This game as JSON</a></p>
+      </div>
+    );
+  }
+});
+window.JsonLink = JsonLink;
