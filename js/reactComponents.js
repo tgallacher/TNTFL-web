@@ -159,14 +159,55 @@ var PageNavigation = React.createClass({
 });
 
 var AddGameForm = React.createClass({
+  getInitialState: function() {
+    return {redPlayer: 'Red', redScore: 0, bluePlayer: 'Blue', blueScore: 0};
+  },
+  handleRedPlayerChange: function(e) {
+    this.setState({redPlayer: e.target.value});
+  },
+  handleRedScoreChange: function(e) {
+    this.setState({redScore: e.target.value, blueScore: 10 - e.target.value});
+  },
+  handleBluePlayerChange: function(e) {
+    this.setState({bluePlayer: e.target.value});
+  },
+  handleBlueScoreChange: function(e) {
+    this.setState({blueScore: e.target.value});
+  },
   render: function() {
     return (
       <div className="addGameForm">
         <form className="navbar-form navbar-right game-entry" method="post" action="game/add/">
           <div className="form-group">
-            <input type="text" name="redPlayer" className="form-control red player" placeholder="Red"/>
-            <input type="text" name="redScore" className="form-control red score" placeholder="0" maxLength="2"/> - <input type="text" name="blueScore" className="form-control blue score" placeholder="0" maxLength="2"/>
-            <input type="text" name="bluePlayer" className="form-control blue player" placeholder="Blue"/>
+            <input
+              type="text"
+              name="redPlayer"
+              className="form-control red player"
+              value={this.state.redPlayer}
+              onChange={this.handleRedPlayerChange}
+            />
+            <input
+              type="text"
+              name="redScore"
+              className="form-control red score"
+              maxLength="2"
+              value={this.state.redScore}
+              onChange={this.handleRedScoreChange}
+            /> - <input
+              type="text"
+              name="blueScore"
+              className="form-control blue score"
+              maxLength="2"
+              value={this.state.blueScore}
+              onChange={this.handleBlueScoreChange}
+            />
+            <input
+              type="text"
+              name="bluePlayer" 
+              className="form-control blue player"
+              value={this.state.bluePlayer}
+              onChange={this.handleBluePlayerChange}
+            />
           </div>
           <button type="submit" className="btn btn-default">
             Add game <span className="glyphicon glyphicon-triangle-right"/>
