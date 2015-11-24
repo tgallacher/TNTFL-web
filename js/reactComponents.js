@@ -246,7 +246,6 @@ var JsonLink = React.createClass({
     );
   }
 });
-window.JsonLink = JsonLink;
 
 var Achievement = React.createClass({
   render: function() {
@@ -314,7 +313,7 @@ var GameDetails = React.createClass({
             <Achievements achievements={this.props.data.blue.achievements}/>
           </div>
         </div>
-        <p><a href="json">This game as JSON</a></p>
+        <JsonLink/>
         % if not game.isDeleted():
         <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a>
         % endif
