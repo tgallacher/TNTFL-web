@@ -160,7 +160,7 @@ var PageNavigation = React.createClass({
 
 var AddGameForm = React.createClass({
   getInitialState: function() {
-    return {redPlayer: 'Red', redScore: 0, bluePlayer: 'Blue', blueScore: 0};
+    return {redPlayer: '', redScore: '', bluePlayer: '', blueScore: ''};
   },
   handleRedPlayerChange: function(e) {
     this.setState({redPlayer: e.target.value});
@@ -183,14 +183,15 @@ var AddGameForm = React.createClass({
               type="text"
               name="redPlayer"
               className="form-control red player"
+              placeholder="Red"
               value={this.state.redPlayer}
               onChange={this.handleRedPlayerChange}
-            />
-            <input
+            /> <input
               type="text"
               name="redScore"
               className="form-control red score"
               maxLength="2"
+              placeholder="0"
               value={this.state.redScore}
               onChange={this.handleRedScoreChange}
             /> - <input
@@ -198,13 +199,14 @@ var AddGameForm = React.createClass({
               name="blueScore"
               className="form-control blue score"
               maxLength="2"
+              placeholder="0"
               value={this.state.blueScore}
               onChange={this.handleBlueScoreChange}
-            />
-            <input
+            /> <input
               type="text"
-              name="bluePlayer" 
+              name="bluePlayer"
               className="form-control blue player"
+              placeholder="Blue"
               value={this.state.bluePlayer}
               onChange={this.handleBluePlayerChange}
             />
