@@ -141,3 +141,55 @@ var GameRecord = React.createClass({
   }
 });
 window.GameRecord = GameRecord;
+
+
+var PageNavigation = React.createClass({
+  render: function() {
+    return (
+      <div className="pageNavigation">
+        <ul className="nav navbar-nav">
+          <li><a href="">Home</a></li>
+          <li><a href="stats/">Stats</a></li>
+          <li><a href="speculate/">Speculate</a></li>
+          <li><a href="api/">API</a></li>
+        </ul>
+      </div>
+    );
+  }
+});
+
+var AddGameForm = React.createClass({
+  render: function() {
+    return (
+      <div className="addGameForm">
+        <form className="navbar-form navbar-right game-entry" method="post" action="game/add/">
+          <div className="form-group">
+            <input type="text" name="redPlayer" className="form-control red player" placeholder="Red"/>
+            <input type="text" name="redScore" className="form-control red score" placeholder="0" maxLength="2"/> - <input type="text" name="blueScore" className="form-control blue score" placeholder="0" maxLength="2"/>
+            <input type="text" name="bluePlayer" className="form-control blue player" placeholder="Blue"/>
+          </div>
+          <button type="submit" className="btn btn-default">
+            Add game <span className="glyphicon glyphicon-triangle-right"/>
+          </button>
+        </form>
+      </div>
+    );
+  }
+});
+
+var NavigationBar = React.createClass({
+  render: function() {
+    return (
+      <div className="navigationBar">
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <p className="navbar-text tntfl-header">Table Football Ladder</p>
+            <PageNavigation/>
+            <AddGameForm/>
+          </div>
+        </nav>
+      </div>
+    );
+  }
+});
+window.NavigationBar = NavigationBar;
