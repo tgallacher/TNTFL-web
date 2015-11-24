@@ -29,6 +29,7 @@
 
     <div id="headings"></div>
     <div id="content"></div>
+    <div id="details"></div>
     <div id="jsonLink"></div>
 
 <script type="text/babel">
@@ -45,10 +46,16 @@
   );
 
   ReactDOM.render(
+    <GameDetails data={data}/>,
+    document.getElementById('details')
+  );
+
+  ReactDOM.render(
     <JsonLink/>,
     document.getElementById('jsonLink')
   );
 </script>
+
 
     <script src="js/bootstrap.min.js"></script>
   </body>

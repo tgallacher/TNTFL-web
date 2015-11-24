@@ -247,3 +247,79 @@ var JsonLink = React.createClass({
   }
 });
 window.JsonLink = JsonLink;
+
+var Achievement = React.createClass({
+  render: function() {
+    return (
+      <div className="achievement">
+        <div className="panel panel-default panel-achievement">
+          <div className="panel-heading">
+            <h3 className="panel-title">{this.props.achievement.name}</h3>
+          </div>
+          <div className="panel-body achievement-${ach.__name__}">
+            {this.props.achievement.description}
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
+
+var Achievements = React.createClass({
+  render: function() {
+    var achievements = this.props.achievements.map(function(ach) {
+      return (
+        <Achievement achievement={ach} />
+      );
+    });
+    return (
+      <div className="achievements">
+        <div className="col-md-4">
+          {achievements}
+        </div>
+      </div>
+    );
+  }
+});
+
+var Punditry = React.createClass({
+  render: function() {
+    return (
+      <div className="punditry">
+        <div className="col-md-4">
+
+          <div className="panel panel-default ">
+            <div className="panel-heading">
+              <h3 className="panel-title">Punditry</h3>
+            </div>
+            <div className="panel-body">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    );
+  }
+});
+
+var GameDetails = React.createClass({
+  render: function() {
+    return (
+      <div className="gameDetails">
+        <div className="recent-game container-fluid">
+          <div className="row achievements">
+            <Achievements achievements={this.props.data.red.achievements}/>
+            <Punditry/>
+            <Achievements achievements={this.props.data.blue.achievements}/>
+          </div>
+        </div>
+        <p><a href="json">This game as JSON</a></p>
+        % if not game.isDeleted():
+        <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a>
+        % endif
+      </div>
+    );
+  }
+});
+window.GameDetails = GameDetails;
