@@ -1,3 +1,13 @@
+function theTime(epoch) {
+  var date = new Date(epoch * 1000);
+  return (
+    date.getFullYear() + "-" +
+    (date.getMonth() + 1) + "-" +
+    date.getDate() + " " +
+    date.getHours() + ":" +
+    date.getMinutes()
+  );
+}
 
 var PlayerName = React.createClass({
   render: function() {
@@ -54,16 +64,6 @@ var GameScore = React.createClass({
 
 var GameTime = React.createClass({
   render: function() {
-    function theTime(epoch) {
-      var date = new Date(epoch * 1000);
-      return (
-        date.getFullYear() + "-" +
-        (date.getMonth() + 1) + "-" +
-        date.getDate() + " " +
-        date.getHours() + ":" +
-        date.getMinutes()
-      );
-    }
     return (
       <a href={this.props.date}>
         {theTime(this.props.date)}
@@ -108,9 +108,7 @@ var GameRecord = React.createClass({
     var blueStripe = this.props.data.red.score == 0 && this.props.data.blue.score == 10;
     return (
       <div className="gameRecord recent-game container-fluid">
-        % if game.isDeleted():
-          <p class="bg-danger">This game was deleted by ${game.deletedBy} at ${game.formatTime(game.deletedAt)}</p>
-        % endif
+        {this.props.data.deleted ? <p className="bg-danger">This game was deleted by {this.props.data.deleted.by} at {theTime(this.props.data.deleted.at)}</p> : null}
         <div className="row recent-game-result">
           <PlayerName href={this.props.data.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
             {this.props.data.red.name}
