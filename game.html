@@ -34,6 +34,8 @@
 
 <script type="text/babel">
   var data =   { "punditry": ["fact", "fact2"], "red" : { "name" : "ajr", "href" : "../../player/ajr/json", "score" : 0, "skillChange" : -15.1222722751, "rankChange" : 0, "newRank" : 21, "achievements" : [ { "name" : "First Game", "description" : "Enter your first game into the ladder" } ] }, "blue" : { "name" : "prc", "href" : "../../player/prc/json", "score" : 10, "skillChange" : 15.1222722751, "rankChange" : 5, "newRank" : 23, "achievements" : [ { "name" : "Fresh Blood", "description" : "Claim points from a new player on their first game" }, { "name" : "Flawless Victory", "description" : "Beat an opponent 10-0" }, { "name" : "Mostly Harmless", "description" : "Play 100 games" } ] }, "positionSwap" : false, "date" : 1404836867}
+  var deleted =  { "deleted" : { "at" : 1448447189, "by" : "tlr" }, "red" : { "name" : "f", "href" : "../../player/f/json", "score" : 2, "skillChange" : 0, "rankChange" : 0, "newRank" : -1, "achievements" : [ ] }, "blue" : { "name" : "b", "href" : "../../player/b/json", "score" : 8, "skillChange" : 0, "rankChange" : 0, "newRank" : -1, "achievements" : [ ] }, "positionSwap" : false, "date" : 1448387149}
+
 
   ReactDOM.render(
     <NavigationBar />,
@@ -41,12 +43,12 @@
   );
 
   ReactDOM.render(
-    <GameRecord data={data}/>,
+    <GameRecord data={deleted}/>,
     document.getElementById('content')
   );
 
   ReactDOM.render(
-    <GameDetails data={data}/>,
+    <GameDetails data={deleted}/>,
     document.getElementById('details')
   );
 </script>

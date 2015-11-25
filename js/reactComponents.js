@@ -108,6 +108,9 @@ var GameRecord = React.createClass({
     var blueStripe = this.props.data.red.score == 0 && this.props.data.blue.score == 10;
     return (
       <div className="gameRecord recent-game container-fluid">
+        % if game.isDeleted():
+          <p class="bg-danger">This game was deleted by ${game.deletedBy} at ${game.formatTime(game.deletedAt)}</p>
+        % endif
         <div className="row recent-game-result">
           <PlayerName href={this.props.data.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
             {this.props.data.red.name}
@@ -328,9 +331,7 @@ var GameDetails = React.createClass({
           </div>
         </div>
         <JsonLink/>
-        % if not game.isDeleted():
-        <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a>
-        % endif
+        {!this.props.data.deleted ? <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a> : null}
       </div>
     );
   }
