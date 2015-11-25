@@ -30,7 +30,6 @@
     <div id="headings"></div>
     <div id="content"></div>
     <div id="details"></div>
-    <div id="jsonLink"></div>
 
 <script type="text/babel">
 
@@ -43,11 +42,11 @@
     "http://www/~tlr/tntfl-test/game/1448465446/json",
     function(result) {
       ReactDOM.render(
-        <GameRecord data={result}/>,
+        <GameSummary game={result}/>,
         document.getElementById('content')
       );
       ReactDOM.render(
-        <GameDetails data={result}/>,
+        <GameDetails game={result}/>,
         document.getElementById('details')
       );
     }

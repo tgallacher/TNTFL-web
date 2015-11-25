@@ -102,46 +102,46 @@ var RankChange = React.createClass({
   }
 });
 
-var GameRecord = React.createClass({
+var GameSummary = React.createClass({
   render: function() {
-    var redStripe = this.props.data.red.score == 10 && this.props.data.blue.score == 0;
-    var blueStripe = this.props.data.red.score == 0 && this.props.data.blue.score == 10;
+    var redStripe = this.props.game.red.score == 10 && this.props.game.blue.score == 0;
+    var blueStripe = this.props.game.red.score == 0 && this.props.game.blue.score == 10;
     return (
-      <div className="gameRecord recent-game container-fluid">
-        {this.props.data.deleted ? <p className="bg-danger">This game was deleted by {this.props.data.deleted.by} at {theTime(this.props.data.deleted.at)}</p> : null}
+      <div className="gameSummary recent-game container-fluid">
+        {this.props.game.deleted ? <p className="bg-danger">This game was deleted by {this.props.game.deleted.by} at {theTime(this.props.game.deleted.at)}</p> : null}
         <div className="row recent-game-result">
-          <PlayerName href={this.props.data.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
-            {this.props.data.red.name}
+          <PlayerName href={this.props.game.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
+            {this.props.game.red.name}
           </PlayerName>
-          <AchievementsSummary achievements={this.props.data.red.achievements} yellow={redStripe} width="col-md-1"/>
-          <GameScore redScore={this.props.data.red.score} blueScore={this.props.data.blue.score} width="col-md-2" yellow={redStripe || blueStripe}/>
-          <AchievementsSummary achievements={this.props.data.blue.achievements} yellow={blueStripe} width="col-md-1"/>
-          <PlayerName href={this.props.data.blue.href} colour="blue-player" yellow={blueStripe} width="col-md-4">
-            {this.props.data.blue.name}
+          <AchievementsSummary achievements={this.props.game.red.achievements} yellow={redStripe} width="col-md-1"/>
+          <GameScore redScore={this.props.game.red.score} blueScore={this.props.game.blue.score} width="col-md-2" yellow={redStripe || blueStripe}/>
+          <AchievementsSummary achievements={this.props.game.blue.achievements} yellow={blueStripe} width="col-md-1"/>
+          <PlayerName href={this.props.game.blue.href} colour="blue-player" yellow={blueStripe} width="col-md-4">
+            {this.props.game.blue.name}
           </PlayerName>
         </div>
         <div className="row">
           <div className="col-md-2">
-            {this.props.data.red.rankChange != 0 ? <RankChange rankChange={this.props.data.red.rankChange} colour="skill-change-red"/> : null}
+            {this.props.game.red.rankChange != 0 ? <RankChange rankChange={this.props.game.red.rankChange} colour="skill-change-red"/> : null}
           </div>
           <div className="col-md-2">
-            {this.props.data.red.skillChange > 0 ? <SkillChange skillChange={this.props.data.red.skillChange} colour="skill-change-red"/> : null}
+            {this.props.game.red.skillChange > 0 ? <SkillChange skillChange={this.props.game.red.skillChange} colour="skill-change-red"/> : null}
           </div>
           <div className="col-md-4">
-            <GameTime date={this.props.data.date}/>
+            <GameTime date={this.props.game.date}/>
           </div>
           <div className="col-md-2">
-            {this.props.data.blue.skillChange >= 0 ? <SkillChange skillChange={this.props.data.blue.skillChange} colour="skill-change-blue"/> : null}
+            {this.props.game.blue.skillChange >= 0 ? <SkillChange skillChange={this.props.game.blue.skillChange} colour="skill-change-blue"/> : null}
           </div>
           <div className="col-md-2">
-            {this.props.data.blue.rankChange != 0 ? <RankChange rankChange={this.props.data.blue.rankChange} colour="skill-change-blue"/> : null}
+            {this.props.game.blue.rankChange != 0 ? <RankChange rankChange={this.props.game.blue.rankChange} colour="skill-change-blue"/> : null}
           </div>
         </div>
       </div>
     );
   }
 });
-window.GameRecord = GameRecord;
+window.GameSummary = GameSummary;
 
 
 var PageNavigation = React.createClass({
@@ -321,15 +321,15 @@ var GameDetails = React.createClass({
       <div className="gameDetails">
         <div className="recent-game container-fluid">
           <div className="row achievements">
-            <Achievements achievements={this.props.data.red.achievements}/>
+            <Achievements achievements={this.props.game.red.achievements}/>
             <div className="col-md-4">
-              {this.props.data.punditry && this.props.data.punditry.length ? <Punditry facts={this.props.data.punditry} /> : null}
+              {this.props.game.punditry && this.props.game.punditry.length ? <Punditry facts={this.props.game.punditry} /> : null}
             </div>
-            <Achievements achievements={this.props.data.blue.achievements}/>
+            <Achievements achievements={this.props.game.blue.achievements}/>
           </div>
         </div>
         <JsonLink/>
-        {!this.props.data.deleted ? <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a> : null}
+        {!this.props.game.deleted ? <a href="delete" className="btn btn-danger pull-right"><span className="glyphicon glyphicon-lock"></span> Delete game</a> : null}
       </div>
     );
   }
