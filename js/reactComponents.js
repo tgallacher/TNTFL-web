@@ -281,22 +281,34 @@ var Achievements = React.createClass({
   }
 });
 
-var Punditry = React.createClass({
+var Fact = React.createClass({
   render: function() {
     return (
-      <div className="punditry">
-        <div className="col-md-4">
+      <div className="fact">
+        {this.props.fact}
+        <br/>
+      </div>
+    );
+  }
+});
 
+var Punditry = React.createClass({
+  render: function() {
+    var facts = this.props.facts.map(function(fact) {
+      return (
+        <Fact fact={fact}/>
+      );
+    });
+    return (
+      <div className="punditry">
         <div className="panel panel-default ">
           <div className="panel-heading">
             <h3 className="panel-title">Punditry</h3>
           </div>
           <div className="panel-body">
-
+            {facts}
           </div>
         </div>
-
-      </div>
       </div>
     );
   }
@@ -309,7 +321,9 @@ var GameDetails = React.createClass({
         <div className="recent-game container-fluid">
           <div className="row achievements">
             <Achievements achievements={this.props.data.red.achievements}/>
-            <Punditry/>
+            <div className="col-md-4">
+              {this.props.data.punditry && this.props.data.punditry.length ? <Punditry facts={this.props.data.punditry} /> : null}
+            </div>
             <Achievements achievements={this.props.data.blue.achievements}/>
           </div>
         </div>
