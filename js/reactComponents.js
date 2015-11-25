@@ -17,10 +17,10 @@ var PlayerName = React.createClass({
   }
 });
 
-var GameAchievements = React.createClass({
+var AchievementsSummary = React.createClass({
   render: function() {
     var className = classNames(
-      'gameAchievements',
+      'achievementsSummary',
       this.props.yellow ? 'yellow-stripe' : '',
       this.props.width
     );
@@ -112,9 +112,9 @@ var GameRecord = React.createClass({
           <PlayerName href={this.props.data.red.href} colour="red-player" yellow={redStripe} width="col-md-4">
             {this.props.data.red.name}
           </PlayerName>
-          <GameAchievements achievements={this.props.data.red.achievements} yellow={redStripe} width="col-md-1"/>
+          <AchievementsSummary achievements={this.props.data.red.achievements} yellow={redStripe} width="col-md-1"/>
           <GameScore redScore={this.props.data.red.score} blueScore={this.props.data.blue.score} width="col-md-2" yellow={redStripe || blueStripe}/>
-          <GameAchievements achievements={this.props.data.blue.achievements} yellow={blueStripe} width="col-md-1"/>
+          <AchievementsSummary achievements={this.props.data.blue.achievements} yellow={blueStripe} width="col-md-1"/>
           <PlayerName href={this.props.data.blue.href} colour="blue-player" yellow={blueStripe} width="col-md-4">
             {this.props.data.blue.name}
           </PlayerName>
@@ -287,16 +287,16 @@ var Punditry = React.createClass({
       <div className="punditry">
         <div className="col-md-4">
 
-          <div className="panel panel-default ">
-            <div className="panel-heading">
-              <h3 className="panel-title">Punditry</h3>
-            </div>
-            <div className="panel-body">
-
-            </div>
+        <div className="panel panel-default ">
+          <div className="panel-heading">
+            <h3 className="panel-title">Punditry</h3>
           </div>
+          <div className="panel-body">
 
+          </div>
         </div>
+
+      </div>
       </div>
     );
   }
