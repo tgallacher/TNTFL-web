@@ -115,7 +115,7 @@ class TheWorst(Achievement):
     @oncePerPlayer
     def applies(self, player, game, opponent, ladder):
         rank = game.bluePosAfter if player.name == game.bluePlayer else game.redPosAfter
-        return rank == len([p for p in ladder.players.values() if p.isActive(atTime=game.time)])
+        return rank == len(ladder.getActivePlayers(game.time))
 
 
 class Improver(Achievement):
@@ -211,12 +211,10 @@ class EarlyBird(Achievement):
 
     def applies(self, player, game, opponent, ladder):
         prevGame = self.getMostRecentGame(game, ladder)
-
         if prevGame == -1:
-            return True
+            return player.wonGame(game)
         thisGame = datetime.datetime.fromtimestamp(game.time).date()
-        won = (game.blueScore > game.redScore) if player.name == game.bluePlayer else (game.blueScore < game.redScore)
-        return thisGame != prevGame and won
+        return thisGame != prevGame and player.wonGame(game)
 
     def getMostRecentGame(self, curGame, ladder):
         numGames = len(ladder.games)

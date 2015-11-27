@@ -25,9 +25,6 @@ def getGamesPerDay(ladder):
 
 def getMostSignificantGames(games):
     return sorted([g for g in games if not g.isDeleted()], key=lambda x: abs(x.skillChangeToBlue), reverse=True)
-
-def getNumActivePlayers(players):
-    return len([p for p in players.values() if p.isActive()])
 %>
 <%inherit file="html.mako" />
 <%namespace name="blocks" file="blocks.mako" />
@@ -39,7 +36,7 @@ for game in ladder.games:
     blueGoals += game.blueScore
 
 mostSignificantGames = getMostSignificantGames(ladder.games)
-activePlayers = getNumActivePlayers(ladder.players)
+activePlayers = len(ladder.getActivePlayers())
 skillBounds = ladder.getSkillBounds()
 streaks = ladder.getStreaks()
 plotData = getGamesPerDay(ladder)
@@ -90,9 +87,7 @@ plotData = getGamesPerDay(ladder)
           <h2 class="panel-title">Most Significant Games</h2>
         </div>
         <div class="panel-body">
-% for game in mostSignificantGames[0:5]:
-    ${self.blocks.render("game", game=game, base=self.attr.base)}
-% endfor
+          ${self.blocks.render("gameList", games=mostSignificantGames[0:5], base=self.attr.base)}
         </div>
       </div>
     </div>
@@ -102,9 +97,7 @@ plotData = getGamesPerDay(ladder)
           <h2 class="panel-title">Least Significant Games</h2>
         </div>
         <div class="panel-body">
-% for game in mostSignificantGames[-5:]:
-    ${self.blocks.render("game", game=game, base=self.attr.base)}
-% endfor
+          ${self.blocks.render("gameList", games=mostSignificantGames[-5:], base=self.attr.base)}
         </div>
       </div>
     </div>
@@ -118,7 +111,7 @@ plotData = getGamesPerDay(ladder)
         <div class="panel-body">
           <div id="gamesPerDay">&nbsp;</div>
           <script type="text/javascript">
-          $.plot("#gamesPerDay", [ ${plotData} ], {'legend' : {show: false}, 'xaxis': {mode: 'time'}, grid: {hoverable: true}, colors: ['#0000FF']});
+            plotGamesPerDay("#gamesPerDay", [ ${plotData} ]);
           </script>
         </div>
       </div>

@@ -1,6 +1,6 @@
-from tntfl.game import Game
 from tntfl.player import Streak
 import tntfl.templateUtils as utils
+from datetime import datetime
 
 class FactChecker(object):
     _reportCount = 10    #eg report the 10 most significant games
@@ -250,7 +250,7 @@ class Streaks(FactChecker):
 
 class StreaksAgainst(Streaks):
     _description = "That was %s's %s consecutive win against %s."
-    _descriptionBroken = '%s defeated %s for the first time in %d games.'
+    _descriptionBroken = '%s avoided losing to %s for the first time in %d games.'
 
     def __init__(self):
         Streaks.__init__(self)
@@ -264,6 +264,18 @@ class StreaksAgainst(Streaks):
         else:
             broken = self._getBrokenStreak(sharedGames, streaks, game)
             return self._descriptionBroken % (player.name, opponent.name, broken.count) if broken is not None and not broken.win else None
+
+class FirstGameSince(FactChecker):
+    _description = "That was %s's first game since retiring on %s."
+
+    def getFact(self, player, game, opponent):
+        if len(player.games) > 1:
+            retireTime = player.games[-2].time + (60 * 60 * 24 * player.DAYS_INACTIVE)
+            if retireTime < game.time:
+                date = datetime.fromtimestamp(float(retireTime))
+                dateStr = date.strftime("%Y-%m-%d")
+                return self._description % (player.name, dateStr)
+        return None
 
 class Pundit(object):
     _factCheckers = []
