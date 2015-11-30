@@ -24,7 +24,15 @@
     <script type="text/javascript" src="${self.attr.base}js/jquery.flot.min.js"></script>
     <script type="text/javascript" src="${self.attr.base}js/jquery.flot.time.min.js"></script>
     <script type="text/javascript" src="${self.attr.base}js/jquery.floatThead.min.js"></script>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="${self.attr.base}js/react.min.js"></script>
+    <script src="${self.attr.base}js/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel" src="${self.attr.base}js/reactComponents.js"></script>
+    <script src="${self.attr.base}js/classnames.js"></script>
+
     <script type="text/javascript" src="${self.attr.base}js/ladder.js"></script>
   </head>
   <body>
